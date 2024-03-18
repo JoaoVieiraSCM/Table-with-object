@@ -78,6 +78,8 @@ function addAluno() {
 
 function inserirAlunoTabela(ra){
 
+    //Nesta area eu estarei manipulando objetos !!!
+    
     var objAluno = JSON.parse(localStorage.getItem(ra));
 
     var p1Cor = objAluno.p1 >= 6 ? `<td class="p1" style="color:var(--aprovado)">${objAluno.p1}</td>` : `<td class="p1" style="color:var(--reprovado)">${objAluno.p1}</td>`;
