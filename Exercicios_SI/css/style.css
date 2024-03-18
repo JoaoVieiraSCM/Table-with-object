@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family:"Poppins";
+}
+
+:root {
+   --aprovado: #5432cd;
+   --reprovado: rgb(183, 8, 8);
+}
+
+body {
+    background-color:rgb(197, 216, 252);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    user-select: none;
+}
+
+#addDiv {
+    background-color: rgb(111, 113, 229);
+    color: white;
+    border-radius: 15px;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 1px 10px 34px 1px rgba(0,0,0,0.56);
+    -webkit-box-shadow: 1px 10px 34px 1px rgba(0,0,0,0.56);
+    -moz-box-shadow: 1px 10px 34px 1px rgba(0,0,0,0.56);
+}
+
+#addDiv > span {
+    font-size: 2.3rem;
+}
+
+#addDiv:hover {
+    font-size: 1.2rem;
+}
+
+dialog {
+    width: 300px;
+    height: 500px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 1%;
+    text-align: center;
+}
+
+dialog > fieldset {
+    color:rgb(111, 113, 229);
+    position: relative;
+    bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+dialog > fieldset > input {
+    text-align: center;
+    padding: 2px 5px;
+    width: 200px;
+}
+
+input:focus {
+    background-color: rgb(255, 255, 138);
+}
+
+dialog > p{
+    position: relative;
+    bottom: 40px;
+}
+
+#closeDialog {
+    position: relative;
+    left: 120px;
+    bottom: 38px;
+    background-color: rgb(183, 8, 8);
+    color: white;
+    border: none;
+    padding: 2px;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+#closeDialog:hover{
+    font-size: 1.05rem;
+}
+
+#enviarOBJ, #adicionarMais {
+    width: 150px;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    cursor: pointer;
+    border:rgb(111, 113, 229) solid 3px;
+    color:rgb(111, 113, 229);
+    border-radius: 30px 30px;
+    transition: all ease 0.2s
+}
+
+#enviarOBJ:hover,#enviarOBJ:focus{
+    background-color: rgb(111, 113, 229);
+    color: white;
+}
+
+table {
+    display: none;
+    border-collapse: collapse;
+    text-align: center;
+    width: 50%;
+    position: absolute;
+    background-color: white;
+}
+
+thead {
+    background-color:rgb(111, 113, 229);
+    color: white;
+    height: 50px;
+    transition: all 0.3s;
+}
+
+thead:hover, thead:focus {
+    background-color:rgb(164, 165, 247);
+}
+
+td {
+    padding: 13px;
+}
+
+tr {
+    cursor: pointer;
+}
+
+tr:nth-child(even){
+    background-color:rgb(240, 240, 240);
+}
+
+tr:hover, tr:focus {
+    background-color:rgb(230, 230, 250);
+}
+
+
+
+.trash{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 17px;
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
+    height: auto;
+}
+
+.trash:hover,.trash:focus {
+    background-color: rgb(217, 20, 20);
+}
+
+#obr {
+    font-size: 0.7rem;
+    color: red;
+}
+
+#adicionarMais {
+    background: -webkit-linear-gradient(0deg, transparent 50%,rgb(111, 113, 229) 50%);
+    background-size: 400px 80px;
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 70px;
+    width: 200px;
+    transition: 0.5s;
+}
+
+#adicionarMais:hover, #adicionarMais:focus {
+    color: white;
+    background-position: 200px 0;
+}
+
+#quantidade, #medias {
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+    height: 100px;
+    border: black solid 3px;
+    border-radius: 15px;
+    position: fixed;
+    top: 60px;
+    right: 70px;
+    font-weight: 500;
+}
+
+#medias {
+    top: 190px;
+}

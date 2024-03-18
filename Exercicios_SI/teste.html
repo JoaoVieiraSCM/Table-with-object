@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
+    <title>Alunos ISW-008</title>
+    <script src="teste.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" defer>
+    <link rel="icon" href="imgs/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <button id="adicionarMais" onclick="">Inserir Novo Aluno</button>
+
+    <div id="quantidade">
+        <p style="color: var(--aprovado)">Aprovados: <span style="color: black" id="aprovados">0</span></p>
+        <p style="color: var(--reprovado)">Reprovados: <span style="color: black" id="reprovados">0</span></p>
+    </div>
+
+    <div id="medias">
+        <p>Média Geral P1: <span id="mediaP1">0</span></p>
+        <p>Média Geral P2: <span id="mediaP2">0</span></p>
+    </div>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Aluno</th>
+                <th>RA</th>
+                <th>P1</th>
+                <th>P2</th>
+                <th>Média</th>
+                <th>Situação</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+
+    <dialog id="addAluno">
+        <button id="closeDialog"><i class="fa-solid fa-x"></i></button>
+        <p>Insira abaixo as informações dos alunos</p>
+        <p id="obr">os campos obrigatórios estão marcados com *</p>
+        <fieldset style="border: none;">
+            <label for="nomeAluno"><span style="color: red">* </span>Nome: </label>
+            <input type="text" name="nome" id="nomeAluno" placeholder="Primeiro nome" required>
+
+            <label for="raAluno"><span style="color: red">* </span>RA: </label>
+            <input type="number" name="RA" id="raAluno" min="0" placeholder="ex: 0000000000000" required>
+            
+            <label for="notaP1"><span style="color: red">* </span>Nota P1: </label>
+            <input type="number" name="notaP1" id="notaP1" max="10" min="0" placeholder="ex: 10" required>
+
+            <label for="notaP2"><span style="color: red">* </span>Nota P2: </label>
+            <input type="number" name="notaP2" id="notaP2" max="10" min="0" placeholder="ex: 10" required>
+        </fieldset>
+        <button id="enviarOBJ" onclick="validarFormulario(), resetForm()">Enviar</button>        
+    </dialog>
+
+    <div id="addDiv">
+        <h1>Adicione um aluno</h1>
+        <span>+</span>
+    </div>
+
+    <script defer>
+        //areea para fechar e abrir as divs, etc.
+
+        var addDiv = document.getElementById("addDiv");
+        var dialog = document.getElementById('addAluno');
+        var closeDialog = document.getElementById('closeDialog');
+        var table = document.getElementById('table');
+        var tbody = document.getElementById('tbody');
+        var quantidade = document.getElementById('quantidade');
+        var medias = document.getElementById('medias');
+
+
+        var addMaisAluno = document.getElementById('adicionarMais');
+
+        var ap = 0;
+        var re = 0;
+
+        var mediaGeralP1 = 0;
+        var mediaGeralP2 = 0;
+    
+
+        addDiv.addEventListener("click",()=>{
+            dialog.style.display = 'flex';
+            addDiv.style.display = 'none';
+        });
+
+
+        closeDialog.addEventListener("click",()=>{
+            dialog.style.display = 'none';
+            table.style.display = 'table';
+            addMaisAluno.style.display = 'block';
+            quantidade.style.display = 'flex';
+            medias.style.display = 'flex';
+            resetForm()
+            atualizarSite();
+        });
+
+        addMaisAluno.addEventListener("click",()=>{
+            dialog.style.display = 'flex';
+            addMaisAluno.style.display = 'none';
+            table.style.display = 'none';
+            quantidade.style.display = 'none';
+            medias.style.display = 'none';
+            limparTabela();
+        });
+
+        //area para verificacao dos inputs.
+
+        var nomeInput = document.getElementById('nomeAluno');
+        var raInput = document.getElementById('raAluno');
+        var notaP1Input = document.getElementById('notaP1');
+        var notaP2Input = document.getElementById('notaP2');
+
+
+        function validarFormulario() {
+
+        var nomeValido = validarCampo(nomeInput, /[0-9]/, 'Esse nome não é válido, tente novamente com outro');
+        var raValido = validarCampo(raInput, /[a-z]i/, 'Esse RA não é válido, tente novamente com outro');
+        var p1Valido = validarNotas(notaP1Input);
+        var p2Valido = validarNotas(notaP2Input);
+
+        if (nomeValido && raValido && p1Valido && p2Valido){
+
+            return atualizarSite(), addAluno();
+
+        }else{
+
+            return nomeValido && raValido && p1Valido && p2Valido;
+
+        }
+
+        }
+        
+
+        function validarCampo(campo, regex, mensagem) {
+            if (regex.test(campo.value) || campo.value === '') {
+                alert(mensagem);
+                campo.value = '';
+                return false;
+            }
+            return true;
+        }
+
+
+        function validarNotas(nota) {
+            if (isNaN(nota.value) || nota.value < 0 || nota.value > 10) {
+                alert(`A nota ${nota.value} nao é valida. Tente novamente com um número entre 0 e 10`);
+                nota.value = '';
+                return false;
+            }
+            return true;
+        }
+
+        function limparTabela() {
+            tbody.innerHTML = '';
+        }
+
+        function resetForm() {
+            nomeInput.value = '';
+            raInput.value = '';
+            notaP1Input.value = '';
+            notaP2Input.value = '';
+        }
+
+    </script>
+</body>
+</html>
